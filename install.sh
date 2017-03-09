@@ -4,7 +4,7 @@ export PATH
 #=================================================
 #       System Required: CentOS/Debian/Ubuntu
 #       Description: PipeSocks
-#       Version: 1.0.1
+#       Version: 1.0.2
 #       Author: Toyo
 #       Blog: https://doub.io/pipesocks-jc1/
 #       Github: https://github.com/pipesocks/install
@@ -74,10 +74,10 @@ Download_pipes(){
 	[[ ! -e "pipesocks-linux.tar.xz" ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 下载失败 !" && exit 1
 	[[ -e ${pipes_file} ]] && rm -rf ${pipes_file}
 	tar -xJf pipesocks-linux.tar.xz && rm -rf pipesocks-linux.tar.xz
-	mv pipesocks piso
-	mkdir pipesocks/
-	mv piso pipesocks/pipesocks
 	[[ ! -e ${pipes_file} ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 解压失败或压缩文件不完整 !" && exit 1
+	mv pipesocks pipes
+	mkdir pipesocks/
+	mv pipes pipesocks/pipesocks
 	cd ${pipes_file}
 	echo "${pipes_new_ver}" > ${pipes_ver}
 }
