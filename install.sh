@@ -78,7 +78,7 @@ Download_pipes(){
 	mkdir pipesocks/
 	mv piso pipesocks/pipesocks
 	[[ ! -e ${pipes_file} ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 解压失败或压缩文件不完整 !" && exit 1
-	cd ${pipes_file} && chmod +x *.sh
+	cd ${pipes_file}
 	echo "${pipes_new_ver}" > ${pipes_ver}
 }
 Add_iptables(){
