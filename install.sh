@@ -50,7 +50,7 @@ check_ver_comparison(){
 			stty erase '^H' && read -p "是否更新 ? [Y/n] :" yn
 			[[ -z "${yn}" ]] && yn="y"
 			if [[ $yn == [Yy] ]]; then
-				PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"` && [[ ! -z $PID ]] && kill -9 ${PID}
+				PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'` && [[ ! -z $PID ]] && kill -9 ${PID}
 				Download_pipes
 				Read_config
 				Start_pipes
@@ -150,7 +150,7 @@ View_pipes(){
 	echo -e " 端口\t: ${Info_font_prefix}${pump_port}${Font_suffix}"
 	echo -e " 密码\t: ${Info_font_prefix}${pump_passwd}${Font_suffix}"
 	echo && echo "————————————————"
-	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	if [[ ! -z $PID ]]; then
 		echo -e " 当前状态: ${Info_font_prefix}正在运行${Font_suffix}"
 	else
@@ -176,11 +176,11 @@ Update_pipes(){
 }
 Start_pipes(){
 	check_installed_status
-	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	[[ ! -z $PID ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 进程正在运行，请检查 !" && exit 1
 	Read_config
 	cd ${pipes_file} && nohup ./pipesocks pump -p ${pump_port} -k ${pump_passwd} &>pipesocks.log &
-	sleep 2s && PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	sleep 2s && PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	if [[ -z $PID ]]; then
 		echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 启动失败 !" && exit 1
 	else
@@ -189,9 +189,9 @@ Start_pipes(){
 }
 Stop_pipes(){
 	check_installed_status
-	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	[[ -z $PID ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} 没有发现 PipeSocks 进程运行，请检查 !" && exit 1
-	kill -9 ${PID} && sleep 2s && PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	kill -9 ${PID} && sleep 2s && PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	if [[ ! -z $PID ]]; then
 		echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 停止失败 !" && exit 1
 	else
@@ -200,7 +200,7 @@ Stop_pipes(){
 }
 Restart_pipes(){
 	check_installed_status
-	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	if [[ ! -z $PID ]]; then
 		Stop_pipes
 	fi
@@ -218,7 +218,7 @@ Uninstall_pipes(){
 	stty erase '^H' && read -p "(默认: n):" unyn
 	[[ -z ${unyn} ]] && unyn="n"
 	if [[ ${unyn} == [Yy] ]]; then
-		PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+		PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 		[[ ! -z $PID ]] && kill -9 ${PID}
 		Read_config
 		Del_iptables
@@ -242,7 +242,7 @@ echo -e " 8. 查看 PipeSocks 账号"
 echo -e " 9. 查看 PipeSocks 日志"
 echo "————————————" && echo
 if [[ -e ${pipes_file} ]]; then
-	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
+	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'`
 	if [[ ! -z "${PID}" ]]; then
 		echo -e " 当前状态: ${Info_font_prefix}已安装${Font_suffix} 并 ${Info_font_prefix}已启动${Font_suffix}"
 	else
