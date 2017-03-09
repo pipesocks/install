@@ -74,6 +74,9 @@ Download_pipes(){
 	[[ ! -e "pipesocks-linux.tar.xz" ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 下载失败 !" && exit 1
 	[[ -e ${pipes_file} ]] && rm -rf ${pipes_file}
 	tar -xJf pipesocks-linux.tar.xz && rm -rf pipesocks-linux.tar.xz
+	mv pipesocks piso
+	mkdir pipesocks/
+	mv piso pipesocks/pipesocks
 	[[ ! -e ${pipes_file} ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 解压失败或压缩文件不完整 !" && exit 1
 	cd ${pipes_file} && chmod +x *.sh
 	echo "${pipes_new_ver}" > ${pipes_ver}
@@ -176,7 +179,7 @@ Start_pipes(){
 	PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
 	[[ ! -z $PID ]] && echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 进程正在运行，请检查 !" && exit 1
 	Read_config
-	cd ${pipes_file} && nohup ./runpipesocks.sh pump -p ${pump_port} -k ${pump_passwd} &>pipesocks.log &
+	cd ${pipes_file} && nohup ./pipesocks pump -p ${pump_port} -k ${pump_passwd} &>pipesocks.log &
 	sleep 2s && PID=`ps -ef|grep "pipesocks"|grep -v "grep"|awk '{print $2}'|sed -n "2p"`
 	if [[ -z $PID ]]; then
 		echo -e "${Error_font_prefix}[错误]${Font_suffix} PipeSocks 启动失败 !" && exit 1

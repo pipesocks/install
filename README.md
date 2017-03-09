@@ -1,6 +1,6 @@
 # pipesocks 一键安装脚本
 
-- 系统支持: CentOS7 / Debian7+ / Ubuntu14+
+- 系统支持: CentOS6+ / Debian7+ / Ubuntu14+
 - 使用方法: https://doub.io/pipesocks-jc2/
 
 ### 下载安装:
